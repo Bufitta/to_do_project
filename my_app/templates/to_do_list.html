@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if works %}
+<form action="/main/" method="post">
+    {% csrf_token %}
+<table border="1" bgcolor="#f0f8ff" align="center">
+    <tr bgcolor="#add8e6" align="center">
+        <th>
+            Статус
+        </th>
+        <th>
+            Дело
+        </th>
+         <th>
+            Действие
+        </th>
+    </tr>
+    {% for work in works %}
+        <tr align="center">
+        <td>
+            {% if work.status == 1 %}
+                <button type="submit" value="{{ work.id }}" name="status" style="background-color: lightseagreen">✓</button>
+            {% else %}
+                <button type="submit" value="{{ work.id }}" name="status" style="background-color: lightcoral">✕</button>
+            {% endif %}
+
+        </td>
+        <td>
+            {{ work.work_title }}
+        </td>
+        <td>
+            <button type="submit" value="{{ work.id }}" name="lift_up" style="background-color: honeydew"> Поднять вверх</button>
+            <button type="submit" value="{{ work.id }}" name="put_down" style="background-color: honeydew"> Опустить</button>
+            <button type="submit" value="{{ work.id }}" name="update" style="background-color: honeydew"> Изменить</button>
+            <button type="submit" value="{{ work.id }}" name="delete" style="background-color: honeydew"> Удалить</button>
+        </td>
+        </tr>
+    {% endfor %}
+</table>
+</form>
+<p align="center"><a href="/form/"><input type="button" value="Добавить новую запись" style="background-color: honeydew"></a></p>
+{% else %}
+    <h1 align="center"style="color: cadetblue"><i>В вашем списке дел нет записей! Хотите создать?</i></h1>
+    <p align="center"><a href="/form/"><input type="button" value="Добавить новую запись" style="background-color: honeydew"></a></p>
+{% endif %}
+</body>
+</html>

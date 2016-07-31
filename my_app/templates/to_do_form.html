@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div align="center">
+<form action="/form/" method="post">
+{% csrf_token %}
+    {% if work_id %}
+        <input type="hidden" value="{{ work_id }}" name="work_id">
+        <input type="text" value="{{ work_title }}" name="work_title"><br>
+        <input type="checkbox" value="{{ work_id }}" name="status">пометить выполненным?<br>
+        <input type="submit" value="Сохранить изменения" style="background-color: aquamarine">
+        <input type="submit" value="Отмена" name="cancel" style="background-color: lightcoral">
+    {% else %}
+        {{ to_do_form.as_p }}
+        <input type="submit" value="Сохранить новое дело" style="background-color: aquamarine">
+        <input type="submit" value="Отмена" name="cancel" style="background-color: lightcoral">
+    {% endif %}
+</form>
+</div>
+</body>
+</html>
